@@ -1,0 +1,63 @@
+<!-- Configuration can specify period or year-to-date, full report will allow both -->
+
+<head>
+  
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/normalize.css">
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/skeleton.css">
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/reports.css">
+
+</head>
+
+<body>
+    
+  <section id="letterhead"></section>
+
+  <section id="title" class="center">
+      <h6>IMCK Hopital Bon Berger</h6>
+      <h6>Income Statement</h6>
+
+      <!-- TODO -->
+      <h6>Tue 6h Jan 2015 - Fri 6th Deb 2015</h6>
+      <span><i>period-uuid-reference</i></span>
+
+  </section>
+  
+  <!-- Income Statement -->
+  <section>
+    <h6>Institution Income</h6>
+
+    <table class="income">
+      <thead>
+        <tr>
+          <th></th>
+          <th colspan="3">Current Period</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Actual Date 2015</td>
+          <td>Budget Date 2015</td>
+          <td>Variance</td>
+      </thead>
+    </table>
+  </section>
+  
+  <!-- Expense Statement -->
+  <section>
+    <h6>Institution Expense</h6>
+
+    <table class="income">
+      <thead>
+        <tr>
+          <th></th>
+          <th colspan="3">Current Period</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Actual Date 2015</td>
+          <td>Budget Date 2015</td>
+          <td>Variance</td>
+      </thead>
+    </table>
+  </section>
+
+</body>

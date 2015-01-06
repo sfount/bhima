@@ -11,9 +11,9 @@
   <section id="letterhead"></section>
 
   <section id="title" class="center">
-      <h5>IMCK Hopital Bon Berger</h5>
-      <h5>Balance Sheet</h5>
-      <h5>As of {{=it.reportDate}}</h5>
+      <h6>IMCK Hopital Bon Berger</h6>
+      <h6>Balance Sheet</h6>
+      <h6>As of {{=it.reportDate}}</h6>
   </section>
   
   <section>
@@ -23,6 +23,7 @@
           <th></th>
           <th>Total</th>
         </tr>
+        <tr class="spacer"> </tr>
       </thead>
 
       <tbody>

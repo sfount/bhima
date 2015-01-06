@@ -1,17 +1,18 @@
-var path            = require('path');
-var fs              = require('fs');
-var q               = require('q');
+var path                  = require('path');
+var fs                    = require('fs');
+var q                     = require('q');
 
 // Import and compile template files
-var dots            = require('dot').process({path : path.join(__dirname, 'templates')});
+var dots                  = require('dot').process({path : path.join(__dirname, 'templates')});
 
-var wkhtmltopdf     = require('wkhtmltopdf');
-var uuid            = require('./../../lib/guid');
-var config          = require('./config');
+var wkhtmltopdf           = require('wkhtmltopdf');
+var uuid                  = require('./../../lib/guid');
+var config                = require('./config');
 
 // Document contexts
-var invoiceContext  = require('./data/invoice');
-var balanceContext  = require('./data/balance_sheet');
+var invoiceContext        = require('./data/invoice');
+var balanceContext        = require('./data/balance_sheet');
+var incomeExpenseContext  = require('./data/income_expense');
 
 // Module configuration 
 var writePath = path.join(__dirname, 'out/');
@@ -25,6 +26,10 @@ var documentHandler = {
   balance : { 
     template : dots.balance_sheet,
     context : balanceContext
+  },
+  income_expense : { 
+    template : dots.income_expense,
+    context : incomeExpenseContext
   }
 };
 

@@ -3,6 +3,7 @@ body {
 }
 
 table {
+  font-size : 10px !important;
   width : 100%;
 }
 
@@ -30,7 +31,20 @@ table {
  * Balance sheet style
  */
 .balance thead > tr > th { 
-  border-bottom : 1px solid #9f9f9f;
+  border-bottom : 3px double #cecece;
+  text-align : left;
+} 
+
+.balance thead > tr.spacer { 
+  height : 5px !important;
+}
+
+.balance tbody > tr > td { 
+  text-align : left;
+}
+
+.income thead > tr { 
+
 }
 
 tr.outline { 
@@ -45,4 +59,6 @@ tr.outline {
   padding : 0;
 }
 
-
+#title { 
+  margin-bottom : 5px;
+}
