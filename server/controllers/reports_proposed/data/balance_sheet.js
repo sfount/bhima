@@ -14,6 +14,8 @@ var balanceDate = new Date();
 var balanceAccountId = 2;
 var titleAccountId = 3; 
 
+var displayAccountNumber = false;
+
 // This method builds a tree data structure of
 // accounts and children of a specified parentId.
 function getChildren(accounts, parentId, depth) {
@@ -130,6 +132,8 @@ exports.compile = function (options) {
     accountTree = filterEmptyAccounts(accountTree);    
     
     context.data = accountTree;
+    context.displayAccountNumber = options.displayAccountNumber || displayAccountNumber;
+
     deferred.resolve(context);
   })
   .catch(deferred.reject)

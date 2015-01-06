@@ -20,7 +20,7 @@
     <table class="balance">
       <thead>
         <tr>
-          <th></th>
+          <th colspan="2"></th>
           <th>Total</th>
         </tr>
         <tr class="spacer"> </tr>
@@ -33,24 +33,31 @@
       {{ function displayRow(accounts) { 
           accounts.forEach(function (line) {  }}
         <tr>
+          
+          <td style="{{? line.account_type_id === 3}}font-weight : bold;{{?}}">
+            {{? it.displayAccountNumber}}
+            {{=line.account_number}}
+            {{?}}
+          </td>
+
           <td style="padding-left: {{=line.depth * 50}}px; {{? line.account_type_id === 3}}font-weight : bold;{{?}}">{{=line.account_txt}}</td>
-          <td>{{? line.account_type_id !== 3}}{{=line.balance}}{{?}}</td>
+          <td class="totalColumn">{{? line.account_type_id !== 3}}{{=line.balance}}{{?}}</td>
         </tr> 
 
       {{ if (line.children.length) displayRow(line.children); }}
         
         {{? line.account_type_id === 3}} 
         <tr class="outline">
+
+          <td></td>
           <td style="padding-left : {{=line.depth * 50}}px; font-weight : bold;">Total {{=line.account_txt}}</td>
-          <td style="font-weight : bold;">{{=line.formattedBalance}}</td>
+          <td class="totalColumn" style="font-weight : bold;">{{=line.formattedBalance}}</td>
         </tr>
         {{?}}
       {{ }); }}
       {{ } }}
 
       {{ displayRow(it.data); }}
-
-
       </tbody>
     </table>
   </section>

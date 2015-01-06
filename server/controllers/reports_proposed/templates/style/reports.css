@@ -43,12 +43,33 @@ table {
   text-align : left;
 }
 
-.income thead > tr { 
+tbody > tr > td.totalColumn { 
+  text-align : right;
+}
 
+/* * whaat */
+thead > tr.totalRight > * { 
+  text-align : right;
+}
+
+tbody > tr > td.textLeft { 
+  text-align : left;
+}
+
+tbody > tr.totalRight > * { 
+  text-align : right;
+}
+
+.income thead > tr > td { 
+  border-bottom : 1px solid #9f9f9f;
 }
 
 tr.outline { 
   border-top : 1px solid #9f9f9f;
+  border-bottom : 1px solid #9f9f9f;
+}
+
+tr.underline { 
   border-bottom : 1px solid #9f9f9f;
 }
 
