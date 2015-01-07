@@ -45,12 +45,23 @@ exports.compile = function (options) {
   
   db.exec(sql, [options.fiscalYearId, incomeAccountId, titleAccountId, expenseAccountId])
     .then(function (accounts) { 
+      
       var accountTree = getChildren(accounts, ROOT_ACCOUNT_ID, 0);
       
-      accountTree = filterEmptyAccounts(accountTree);
-
-      context.data = accountTree;
+      // FIXME Extend object hack
+      var incomeData = JSON.parse(JSON.stringify(accountTree));
+      var expenseData = JSON.parse(JSON.stringify(accountTree));
       
+      // FIXME Lots of processing, very little querrying - this is what MySQL is foreh
+      incomeData = filterAccounts(incomeData, expenseAccountId);
+      incomeData = trimEmptyAccounts(incomeData);
+
+      expenseData = filterAccounts(expenseData, incomeAccountId);
+      expenseData = trimEmptyAccounts(expenseData);
+      
+      context.incomeData = incomeData;
+      context.expenseData = expenseData; 
+
       deferred.resolve(context);
     })
     .catch(deferred.reject)
@@ -84,10 +95,24 @@ function getChildren(accounts, parentId, depth) {
 
   return children;
 }
+  
+function filterAccounts(accounts, filterType) { 
+  
+  function typeFilter(account) { 
+    var matchesFilterType = account.account_type_id === filterType;
 
+    if (matchesFilterType) { 
+      return null; 
+    } else { 
+      if (account.children) account.children = account.children.filter(typeFilter);
+      return account;
+    }
+  }
 
-// FIXME Whatever - Jog on CS 101 - oh man 
-function filterEmptyAccounts(accounts, requiredId) { 
+  return accounts.filter(typeFilter);
+}
+
+function trimEmptyAccounts(accounts) { 
   var removedAccount = true;
     
   while (removedAccount) { 

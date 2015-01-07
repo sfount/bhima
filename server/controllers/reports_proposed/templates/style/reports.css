@@ -3,7 +3,7 @@ body {
 }
 
 table {
-  font-size : 10px !important;
+  font-size : 10px;
   width : 100%;
 }
 
@@ -34,6 +34,10 @@ table {
   border-bottom : 3px double #cecece;
   text-align : left;
 } 
+
+.balance thead > tr > th:not(:first-child) { 
+  padding-left : 10px;
+}
 
 .balance thead > tr.spacer { 
   height : 5px !important;
@@ -71,6 +75,10 @@ tr.outline {
 
 tr.underline { 
   border-bottom : 1px solid #9f9f9f;
+}
+
+span.groupTitle { 
+  font-size : 12px !important;
 }
 
 .center > * { 

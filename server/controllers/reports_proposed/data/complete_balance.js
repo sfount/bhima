@@ -73,7 +73,9 @@ function aggregate(value, account) {
     
   // FIXME MySQL querry should never return NULL - normalization should not have to be done
   account.balance = account.balance || 0;
-  
+  account.debit = account.debit || 0;
+  account.credit = account.credit || 0;
+
   // FIXME Balances are ONLY ever assigned to the very top level accounts, not for every title account
   account.formattedBalance = numeral(account.balance).format(formatDollar);
 
@@ -98,9 +100,9 @@ exports.compile = function (options) {
   context.reportDate = balanceDate.toDateString();
 
   var sql =
-    'SELECT account.id, account.account_number, account.account_txt, account.account_type_id, account.parent, totals.balance, totals.period_id ' +
+    'SELECT account.id, account.account_number, account.account_txt, account.account_type_id, account.parent, totals.balance, totals.debit, totals.credit, totals.period_id ' +
     'FROM account LEFT JOIN (' +
-      'SELECT period_total.account_id, IFNULL(SUM(period_total.debit - period_total.credit), 0) as balance, period_total.period_id ' +
+      'SELECT period_total.account_id, IFNULL(SUM(period_total.debit - period_total.credit), 0) as balance, period_total.debit, period_total.credit, period_total.period_id ' +
       'FROM period_total ' +
       'WHERE period_total.fiscal_year_id = ? ' +
       'GROUP BY period_total.account_id ' +
@@ -117,6 +119,9 @@ exports.compile = function (options) {
   })
   .then(function (accounts) {
     var accountTree;
+  
+    console.log('results');
+    console.log(accounts);
 
     // Create the accounts and balances into a tree
     // data structure
@@ -125,7 +130,13 @@ exports.compile = function (options) {
     // aggregate the account balances of child accounts into
     // the parent account
     accountTree.forEach(function (account) {
-      account.balance = account.children.reduce(aggregate, 0); 
+    
+      account.balance = account.children.reduce(aggregate, 0);
+      
+      // FIXME
+      account.debit = account.debit || 0;
+      account.credit = account.credit || 0;
+
       account.formattedBalance = numeral(account.balance).format(formatDollar); 
     });
 

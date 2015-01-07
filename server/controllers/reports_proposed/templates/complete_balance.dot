@@ -1,3 +1,4 @@
+<!-- TODO Underline total row from text onwards - clearly demonstrating the indent level of the total group-->
 <head>
   
   <link rel="stylesheet" href="{{=it.path}}/templates/style/normalize.css">
@@ -12,7 +13,7 @@
 
   <section id="title" class="center">
       <h6>IMCK Hopital Bon Berger</h6>
-      <h6>Balance Sheet</h6>
+      <h6>State of Balance</h6>
       <h6>As of {{=it.reportDate}}</h6>
   </section>
   
@@ -21,6 +22,9 @@
       <thead>
         <tr>
           <th colspan="2"></th>
+
+          <th>Debit</th>
+          <th>Credit</th>
           <th>Total</th>
         </tr>
         <tr class="spacer"> </tr>
@@ -41,6 +45,10 @@
           </td>
 
           <td style="padding-left: {{=line.depth * 50}}px; {{? line.account_type_id === 3}}font-weight : bold;{{?}}">{{=line.account_txt}}</td>
+        
+          
+          <td class="totalColumn">{{? line.account_type_id !== 3}}{{=line.debit}}{{?}}</td>
+          <td class="totalColumn">{{? line.account_type_id !== 3}}{{=line.credit}}{{?}}</td>
           <td class="totalColumn">{{? line.account_type_id !== 3}}{{=line.balance}}{{?}}</td>
         </tr> 
 
@@ -51,6 +59,7 @@
 
           <td></td>
           <td style="padding-left : {{=line.depth * 50}}px; font-weight : bold;">Total {{=line.account_txt}}</td>
+          <td colspan="2"></td>
           <td class="totalColumn" style="font-weight : bold;">{{=line.formattedBalance}}</td>
         </tr>
         {{?}}
