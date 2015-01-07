@@ -11,7 +11,8 @@ var config                = require('./config');
 
 // Document contexts
 var invoiceContext        = require('./data/invoice');
-var completeBalanceContext        = require('./data/complete_balance');
+var balanceSheetContext   = require('./data/balance_sheet');
+var completeBalanceContext  = require('./data/complete_balance');
 var incomeExpenseContext  = require('./data/income_expense');
 
 // Module configuration 
@@ -23,6 +24,10 @@ var documentHandler = {
     template : dots.invoice,
     context : invoiceContext
   }, 
+  balance_sheet : { 
+    template : dots.balance_sheet, 
+    context : balanceSheetContext
+  },
   complete_balance : { 
     template : dots.complete_balance,
     context : completeBalanceContext

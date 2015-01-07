@@ -1,0 +1,90 @@
+<head>
+  
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/normalize.css">
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/skeleton.css">
+  <link rel="stylesheet" href="{{=it.path}}/templates/style/reports.css">
+
+</head>
+
+<body>
+
+  <section id="letterhead"></section>
+
+  <section id="title" class="center">
+      <h6>IMCK Hopital Bon Berger</h6>
+      <h6>Balance Sheet</h6>
+      <h6>As of {{=it.reportDate}}</h6>
+  </section>
+  
+  <section>
+    <div class="row">
+      <div class="six columns">
+        <table class="balance">
+          <thead>
+            <tr>
+              <th>Assets</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Repeat -->
+            <tr class="outline">
+              <td><b>ASSETS</b></td>
+              <td>0</td>
+            </tr>
+          </tbody>  
+        </table>
+      </div>
+
+      <div class="six columns">
+        <table class="balance">
+          <thead>
+            <tr>
+              <th>Liabilities</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Repeat -->
+            <tr class="outline">
+              <td><b>LIABILITIES</b></td>
+              <td>0</td>
+            </tr>
+          </tbody>  
+        </table>
+ 
+      </div>
+    </div>
+
+    
+  </section>
+  
+  <section>
+    <div class="row">
+      <div class="twelve columns">
+        <table class="balance">
+          <thead>
+            <tr>
+              <th>Combined Balance</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Repeat --> 
+            {{~ it.data.list :account:index}}
+              <tr>
+                <td>{{=account.account_txt}}</td>
+                <td>{{=account.balance}}</td>
+              </tr>
+            {{~}}
+            <tr class="outline">
+              <td><b>COMBINED BALANCE</b></td>
+              <td>0</td>
+            </tr>
+          </tbody>  
+        </table>
+
+      </div>
+    </div>
+  </section>
+</body>
