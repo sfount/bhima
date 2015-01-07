@@ -72,6 +72,10 @@ tbody > tr.totalRight > * {
   border-bottom : 1px solid #9f9f9f;
 }
 
+.aging thead > tr > th { 
+  border-bottom : 1px solid #9f9f9f;
+}
+
 tr.outline { 
   border-top : 1px solid #9f9f9f;
   border-bottom : 1px solid #9f9f9f;

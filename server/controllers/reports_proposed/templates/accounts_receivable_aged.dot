@@ -15,15 +15,33 @@
       <h6>Accounts Receivable Aging Report</h6>
       <h6>As of {{=it.reportDate}}</h6>
   </section>
-
+  <section style="margin-bottom : 10px">
+    <span>IMCK Debtors</span>
+  </section>
   <section> 
-    <table>
+    <table class="aging">
       <thead>
-
+        <tr class="totalRight">
+          <th style="text-align : left;">Name</th>
+          <th>0-30 Days</th>
+          <th>30-60 Days</th>
+          <th>60-90 Days</th>
+          <th>90-120 Days</th>
+          <th>>120 Days</th> 
+        </th>
       </thead>
 
       <tbody>
-
+        {{~it.data :debtor:index}}
+          <tr class="totalRight">
+            <td style="text-align : left;">{{=debtor.name}}</td>
+            <td>{{=debtor.c1}}</td>
+            <td>{{=debtor.c2}}</td>
+            <td>{{=debtor.c3}}</td>
+            <td>{{=debtor.c4}}</td>
+            <td>{{=debtor.c5}}</td>
+          </tr>
+        {{~}}
       </tbody>
     </table>
   </section>
