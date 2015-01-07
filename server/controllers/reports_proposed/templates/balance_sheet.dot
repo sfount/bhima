@@ -79,7 +79,7 @@
             {{~}}
             <tr class="outline">
               <td><b>COMBINED BALANCE</b></td>
-              <td>0</td>
+              <td>{{=it.data.total}}</td>
             </tr>
           </tbody>  
         </table>

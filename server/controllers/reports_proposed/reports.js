@@ -14,6 +14,7 @@ var invoiceContext        = require('./data/invoice');
 var balanceSheetContext   = require('./data/balance_sheet');
 var completeBalanceContext  = require('./data/complete_balance');
 var incomeExpenseContext  = require('./data/income_expense');
+var accountsReceivableContext = require('./data/accounts_receivable_aged');
 
 // Module configuration 
 var writePath = path.join(__dirname, 'out/');
@@ -35,6 +36,10 @@ var documentHandler = {
   income_expense : { 
     template : dots.income_expense,
     context : incomeExpenseContext
+  }, 
+  accounts_receivable_aged : { 
+    template: dots.accounts_receivable_aged, 
+    context : accountsReceivableContext
   }
 };
 
@@ -78,7 +83,8 @@ exports.build = function (req, res, next) {
   function renderPDF(reportData) { 
     var compiledReport;
     var hash = uuid();
-    
+  
+    console.log('returned reportData', reportData);
     var format = options.format || 'standard';
     var language = options.language || 'en';
     var configuration = buildConfiguration(hash, format); 
@@ -86,6 +92,8 @@ exports.build = function (req, res, next) {
     // Ensure templates have path data
     reportData.path = reportData.path || __dirname;
     compiledReport = handler.template(reportData);
+
+  
 
     // wkhtmltopdf exceptions not handled
     var pdf = wkhtmltopdf(compiledReport, configuration, function (code, signal, a) { 

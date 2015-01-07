@@ -35,8 +35,12 @@ table {
   text-align : left;
 } 
 
-.balance thead > tr > th:not(:first-child) { 
+.balance thead > tr > th { 
   padding-left : 10px;
+}
+
+.balance tbody > tr > td:nth-child(2) { 
+  padding-left : 100px;
 }
 
 .balance thead > tr.spacer { 
