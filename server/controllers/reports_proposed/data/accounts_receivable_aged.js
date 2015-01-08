@@ -54,7 +54,40 @@ exports.compile = function (options) {
   // execute and expose data.
   db.exec(sql)
   .then(function (rows) {
+    
+    var totals = {};
+
+    rows.forEach(function (row) { 
+      var keys = Object.keys(row);
+
+      keys.forEach(function (key) { 
+        if (row[key] === null) { 
+
+          // FIXME 
+          totals[key] = totals[key] || 0;
+
+          row[key] = '-';
+        } else { 
+
+          if (!isNaN(Number(row[key]))) { 
+            totals[key] = totals[key] || 0;
+            totals[key] += Number(row[key]);
+          }
+        }
+      });
+
+    });
+
+    
+    Object.keys(totals).forEach(function (key) { 
+      totals[key] = totals[key].toFixed(2) || '-';
+    })
+
+    console.log('got', totals);
+    console.log('totals');
+
     context.data = rows;
+    context.totals = totals;
     dfd.resolve(context);
   })
   .catch(dfd.reject)

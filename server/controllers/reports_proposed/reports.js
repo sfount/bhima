@@ -84,7 +84,6 @@ exports.build = function (req, res, next) {
     var compiledReport;
     var hash = uuid();
   
-    console.log('returned reportData', reportData);
     var format = options.format || 'standard';
     var language = options.language || 'en';
     var configuration = buildConfiguration(hash, format); 
